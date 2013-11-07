@@ -16,8 +16,22 @@ public enum HttpStatusCode
 {
 	CONTINUE(100, "Continue"),
 	OK(200, "OK"),
-	NOT_FOUND(400, "NOT FOUND");
-	//TODO: Complete status code list (see http://tools.ietf.org/html/rfc2616.html#section-6.1.1)
+	BAD_REQUEST(400, "Bad Request"),
+    SWITCH(101, "Switching Protocols"),
+    CREATED(201, "Created"),
+    ACCEPTED(202, "Accepted"),
+    MULTIPLE_CHOICES(300, "Multiple Choices"),
+    MOVEDPERM(301, "Moved Permanently"),
+    UNAUTHORIZED(401, "Unauthorized"),
+    PAYMENT(402, "Payment Required"),
+    FORBIDDEN(403, "Forbidden"),
+    NOT_FOUND(404, "Not Found"),
+    GONE(410, "Gone"),
+    INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
+    NOT_IMPLEMENTED(501, "Not Implemented"),
+    BAD_GATEWAY(502, "Bad Gateway");
+    
+	//Complete status code list (see http://tools.ietf.org/html/rfc2616.html#section-6.1.1)
 
 	private final int code;
 	private final String reasonPhrase;

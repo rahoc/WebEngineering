@@ -8,34 +8,51 @@ import de.uulm.mi.web.http.HttpVersion;
 
 public class BasicHttpResponse implements HttpResponse
 {
-	// TODO: add setters/appropriate constructors
-
+	// add setters/appropriate constructors
+	HttpVersion httpVersion;
+	Map<String, String> headers;
+	byte[] entity;
+	HttpStatusCode httpStatusCode;
+	
+	public BasicHttpResponse(HttpVersion version, HttpStatusCode statusCode, Map<String, String> headers, byte[] entity) {
+		this.httpVersion = version;
+		this.httpStatusCode = statusCode;
+		this.entity = entity;
+		this.headers = headers;
+	}
+	
+	public void setHttpStatusCode(HttpStatusCode status) {
+		this.httpStatusCode = status;
+	}
+	public void setEntity(byte[] entity) {
+		this.entity = entity;
+	}
+	public void setHeader(Map<String, String> headers) {
+		this.headers = headers;
+	}
+	
 	@Override
 	public HttpVersion getHttpVersion()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return httpVersion;
 	}
 
 	@Override
 	public Map<String, String> getHeaders()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return headers;
 	}
 
 	@Override
 	public byte[] getEntity()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return entity;
 	}
 
 	@Override
 	public HttpStatusCode getStatusCode()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return httpStatusCode;
 	}
 
 }

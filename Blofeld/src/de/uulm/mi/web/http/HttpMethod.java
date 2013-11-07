@@ -10,8 +10,12 @@ package de.uulm.mi.web.http;
  */
 public enum HttpMethod
 {
-	HEAD;
-	//TODO: Complete other methods (see http://tools.ietf.org/html/rfc2616.html#section-9)
+	HEAD,
+	GET,
+	PUT,
+	POST;
+	
+	//Complete other methods (see http://tools.ietf.org/html/rfc2616.html#section-9)
 
 	@Override
 	public String toString()
@@ -28,7 +32,23 @@ public enum HttpMethod
 	 */
 	public static HttpMethod extractMethod(String requestLine) throws IllegalArgumentException
 	{
-		//TODO: Extract HTTP Method from request line (see http://tools.ietf.org/html/rfc2616.html#section-5.1).
-		return null;
+		//Extract HTTP Method from request line (see http://tools.ietf.org/html/rfc2616.html#section-5.1).
+		String[] request = requestLine.split(" ");
+		if (request[0] == "HEAD") {
+			return HttpMethod.HEAD;
+		}
+		else if (request[0] == "GET") {
+			return HttpMethod.GET;
+		}
+		else if (request[0] == "PUT") {
+			return HttpMethod.PUT;
+		}
+		else if (request[0] == "POST") {
+			return HttpMethod.POST;
+		}
+		else {
+			throw new IllegalArgumentException("HTTP Method not known");
+		
+		}
 	}
 }

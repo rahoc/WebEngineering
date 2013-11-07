@@ -17,7 +17,7 @@ import de.uulm.mi.web.server.HttpServer;
  */
 public class BasicHttpServer implements HttpServer
 {
-	public static final String SERVER_NAME = "MyServer";
+	public static final String SERVER_NAME = "BlofeldServer";
 	public static final String SERVER_VERSION = "0.1";
 	public static final int DEFAULT_PORT = 8080;
 	public static final String SERVER_SIGNATURE = SERVER_NAME + "/" + SERVER_VERSION;
@@ -49,7 +49,7 @@ public class BasicHttpServer implements HttpServer
 		try
 		{
 			serverSocket = new ServerSocket(port);
-			workerPool = Executors.newFixedThreadPool(4);
+			workerPool = Executors.newFixedThreadPool(16);
 			dispatcherService = Executors.newSingleThreadExecutor();
 		}
 		catch (IOException e)
