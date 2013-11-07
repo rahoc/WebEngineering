@@ -13,7 +13,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import de.uulm.mi.web.http.HttpRequest;
 import de.uulm.mi.web.http.HttpResponse;
@@ -37,10 +36,10 @@ public class BasicHttpWorker extends HttpWorker
  
 		String line;
 		try {
- 
+			// Read the Inputstream in a well formatted requestLine String
 			br = new BufferedReader(new InputStreamReader(inputStream));
 			while ((line = br.readLine()) != null &&!line.isEmpty()) {
-				sb.append(line+" ");
+				sb.append(line+"\r\n");
 			}
  
 		} catch (IOException e) {
@@ -54,7 +53,8 @@ public class BasicHttpWorker extends HttpWorker
 				}
 			}
 		}
-
+		
+		// Create BasicHttpRequest
 		HttpRequest req = new BasicHttpRequest( sb.toString());
 		return req;
 	}
@@ -62,13 +62,20 @@ public class BasicHttpWorker extends HttpWorker
 	@Override
 	protected HttpResponse handleRequest(HttpRequest request)
 	{
+		// Create empty response
 		BasicHttpResponse response = new BasicHttpResponse(request.getHttpVersion(),null, null, null);
-		Path file = Paths.get("C:\\myweb\\" + request.getRequestUri());
+		// read specific file
+		// TODO: Change from testing with fixed file to the request URI (windows vs. unix formatting)
+		Path file = Paths.get("C:\\myweb\\index.html"); // + request.getRequestUri());
 		byte[] fileArray;
 		try {
+			// Read the file as bytes
 			fileArray = Files.readAllBytes(file);
+			// Status OK
 			response.setHttpStatusCode(HttpStatusCode.OK);
+			// Entity
 			response.setEntity(fileArray);
+			// Create Headers
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Host", request.getHeaders().get("Host"));
 			response.setHeader(headers);
@@ -106,8 +113,8 @@ public class BasicHttpWorker extends HttpWorker
 	@Override
 	protected boolean keepAlive(HttpRequest request, HttpResponse response)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		// TODO Auto-generated method stub musst be implemented for testing set to true...
+		return true;
 	}
 
 	

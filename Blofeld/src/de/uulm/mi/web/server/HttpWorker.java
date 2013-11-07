@@ -35,13 +35,6 @@ public abstract class HttpWorker implements Callable<Void>
 	{
 		this.socket = socket;
 		this.server = server;
-		try {
-			call();
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -56,7 +49,13 @@ public abstract class HttpWorker implements Callable<Void>
 		// Send response and close connection, if necessary
 		if (keepAlive(request, response))
 		{
-			sendResponse(response, socket.getOutputStream());
+			// TODO: HELP! Why is response not called? Exceptions says socket is closed...
+			try {
+				sendResponse(response, socket.getOutputStream());
+			}
+			catch (Exception e ) {
+				e.printStackTrace();
+			}
 			server.dispatchRequest(socket);
 		}
 		else

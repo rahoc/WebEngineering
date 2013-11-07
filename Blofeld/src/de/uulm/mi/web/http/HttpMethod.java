@@ -34,16 +34,16 @@ public enum HttpMethod
 	{
 		//Extract HTTP Method from request line (see http://tools.ietf.org/html/rfc2616.html#section-5.1).
 		String[] request = requestLine.split(" ");
-		if (request[0] == "HEAD") {
+		if (request[0].equals("HEAD")) {
 			return HttpMethod.HEAD;
 		}
-		else if (request[0] == "GET") {
+		else if (request[0].equals("GET")) {
 			return HttpMethod.GET;
 		}
-		else if (request[0] == "PUT") {
+		else if (request[0].equals("PUT")) {
 			return HttpMethod.PUT;
 		}
-		else if (request[0] == "POST") {
+		else if (request[0].equals("POST")) {
 			return HttpMethod.POST;
 		}
 		else {

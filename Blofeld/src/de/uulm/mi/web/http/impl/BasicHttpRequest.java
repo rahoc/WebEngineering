@@ -38,7 +38,9 @@ public class BasicHttpRequest implements HttpRequest
 	
 	public void setEntitiy(String requestLine) {
 		String[] request = requestLine.split("\r\n\r\n");
-		this.entity = request[1].getBytes();
+		if (request.length > 1) {
+			this.entity = request[1].getBytes();
+		}
 	}
 	
 	public void setRequestUri(String requestLine) {
