@@ -39,8 +39,8 @@ public class BasicHttpWorker extends HttpWorker
 		try {
  
 			br = new BufferedReader(new InputStreamReader(inputStream));
-			while ((line = br.readLine()) != null) {
-				sb.append(line);
+			while ((line = br.readLine()) != null &&!line.isEmpty()) {
+				sb.append(line+" ");
 			}
  
 		} catch (IOException e) {

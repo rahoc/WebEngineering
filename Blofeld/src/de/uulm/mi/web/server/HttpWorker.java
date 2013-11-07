@@ -35,6 +35,13 @@ public abstract class HttpWorker implements Callable<Void>
 	{
 		this.socket = socket;
 		this.server = server;
+		try {
+			call();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
