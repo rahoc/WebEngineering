@@ -46,11 +46,11 @@ public class BasicHttpWorker extends HttpWorker
 			e.printStackTrace();
 		} finally {
 			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					br.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
 			}
 		}
 		
@@ -75,13 +75,14 @@ public class BasicHttpWorker extends HttpWorker
 			response.setHttpStatusCode(HttpStatusCode.OK);
 			// Entity
 			response.setEntity(fileArray);
-			// Create Headers
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Host", request.getHeaders().get("Host"));
-			response.setHeader(headers);
+			
 		} catch (IOException e) {
 			response.setHttpStatusCode(HttpStatusCode.BAD_REQUEST);
 		}
+		// Create Headers
+			Map<String, String> headers = new HashMap<String, String>();
+			headers.put("Host", request.getHeaders().get("Host"));
+			response.setHeader(headers);
 		return response;
 	}
 
