@@ -2,6 +2,7 @@ package de.uulm.mi.web.server.impl;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -66,7 +67,8 @@ public class BasicHttpWorker extends HttpWorker
 		BasicHttpResponse response = new BasicHttpResponse(request.getHttpVersion(),null, null, null);
 		// read specific file
 		// TODO: Change from testing with fixed file to the request URI (windows vs. unix formatting)
-		Path file = Paths.get("C:\\myweb\\index.html"); // + request.getRequestUri());
+		//Path file = Paths.get("C:\\myweb\\index.html"); // + request.getRequestUri());
+		Path file = Paths.get("C:\\myweb" + request.getRequestUri());
 		byte[] fileArray;
 		try {
 			// Read the file as bytes
@@ -102,20 +104,21 @@ public class BasicHttpWorker extends HttpWorker
 		  sb.append("\r\n");
 		}
 		sb.append("\r\n");
-		sb.append(response.getEntity());
-		
+		sb.append(response.getEntityAsString());
+		sb.append("\r\n");
 		// Write it
 		BufferedWriter bw = null;
 		bw = new BufferedWriter(new OutputStreamWriter(outputStream));
 		bw.write(sb.toString());
-		
+		bw.flush();
+		System.out.print(sb.toString());
 	}
 
 	@Override
 	protected boolean keepAlive(HttpRequest request, HttpResponse response)
 	{
 		// TODO Auto-generated method stub musst be implemented for testing set to true...
-		return true;
+		return false;
 	}
 
 	

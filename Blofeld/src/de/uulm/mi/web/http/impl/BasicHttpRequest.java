@@ -1,7 +1,10 @@
 package de.uulm.mi.web.http.impl;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
 
 import de.uulm.mi.web.http.HttpMethod;
 import de.uulm.mi.web.http.HttpRequest;
@@ -43,6 +46,19 @@ public class BasicHttpRequest implements HttpRequest
 		}
 	}
 	
+	public String getEntityAsString() {
+		String decoded;
+		try {
+			decoded = new String(this.getEntity(), "UTF-8");
+			return decoded;
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		}
+		
+	}
+	
 	public void setRequestUri(String requestLine) {
 		String[] request = requestLine.split(" ");
 		this.requestUri = request[1];
@@ -75,7 +91,11 @@ public class BasicHttpRequest implements HttpRequest
 	@Override
 	public String getRequestUri()
 	{
-		return requestUri;
+		String req = this.requestUri.replaceAll("/", Matcher.quoteReplacement("\\"));
+		if (req.equals("") || req.equals("\\")) {
+			req = "\\index.html";
+		}
+		return req;
 	}
 
 }

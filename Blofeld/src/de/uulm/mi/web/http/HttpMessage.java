@@ -30,5 +30,12 @@ public interface HttpMessage
 	 * @return
 	 */
 	byte[] getEntity();
+	
+	/**
+	 * Returns the entity as a string or "", if no entity is available.
+	 * 
+	 * @return
+	 */
+	String getEntityAsString();
 
 }

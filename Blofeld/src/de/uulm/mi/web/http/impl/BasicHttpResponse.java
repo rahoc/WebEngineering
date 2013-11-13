@@ -1,5 +1,6 @@
 package de.uulm.mi.web.http.impl;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import de.uulm.mi.web.http.HttpResponse;
@@ -47,6 +48,19 @@ public class BasicHttpResponse implements HttpResponse
 	public byte[] getEntity()
 	{
 		return entity;
+	}
+	
+	public String getEntityAsString() {
+		String decoded;
+		try {
+			decoded = new String(this.getEntity(), "UTF-8");
+			return decoded;
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		}
+		
 	}
 
 	@Override

@@ -61,10 +61,10 @@ public abstract class HttpWorker implements Callable<Void>
 		else
 		{
 			response.getHeaders().put("Connection", "close");
+			
 			sendResponse(response, socket.getOutputStream());
 			socket.close();
 		}
-
 		// We do not return anything here.
 		return null;
 	}
